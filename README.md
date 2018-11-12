@@ -14,6 +14,7 @@
 * [微信类](#wx_class)
 	* [微信公众号类](#wx_mp)
 		* [微信公众号后台服务器类](#wx_mp_server)
+		* [微信公众号模板消息类](#wx_mp_mbxx)
 	* [微信支付类](#wx_pay)
 		* [微信支付回调类](#wx_pay_qyfk)
 		* [企业付款类](#wx_pay_qyfk)
@@ -37,6 +38,8 @@
 
 │ ├─ Muxin
 
+│ │ ├─ auto.php
+
 │ │ ├─ weixin
 
 │ │ │ ├─ mp
@@ -50,11 +53,13 @@
 **index.php**
 ```php
 <?php
-	//引入公众号服务类
-	include("Muxin/weixin/mp/server/wx_mp_server.class.php");
+
+
+	//引用自动加载
+	include("./Muxin/auto.php");
 
 	//继承公众号类实现自己的功能
-	class test extends wx_mp_server{
+	class test extends \Muxin\weixin\mp\server\wx_mp_server{
 		//重载 接收文本消息
 		public function msg_text($data){
 			//服务器下发的信息
@@ -126,15 +131,16 @@
 
 ### ThinkPHP 使用方法
 
-将 Muxin 文件夹复制到 ThinkPHP/Lirary 目录
+ThinkPHP 3.x 将 Muxin 文件夹复制到 ThinkPHP/Lirary 目录下
+
+ThinkPHP 5.x 将 Muxin 文件夹复制到 项目目录的 extend 目录下
+
 
 ```php
 <?php
-	//导入类
-	import("Muxin.weixin.mp.server.wx_mp_server");
-	
+
 	//继承 wx_mp_server 类
-	class test extends \wx_mp_server{
+	class test extends \Muxin\weixin\mp\server\wx_mp_server{
 		/*
 			您的业务代码
 		*/
@@ -146,6 +152,17 @@
 [返回目录](#menu)
 
 ***
+
+<h3 id="wx_mp_mbxx">- 微信公众号模板消息类</h3>
+
+
+
+
+[返回目录](#menu)
+
+***
+
+
 
 <h3 id="wx_pay"></h3>
 <h3 id="wx_pay_qyfk">- 微信企业付款类</h3>
@@ -161,6 +178,8 @@
 
 │ ├─ Muxin
 
+│ │ ├─ auto.php
+
 │ │ ├─ weixin
 
 │ │ │ ├─ pay
@@ -173,9 +192,9 @@
 **index.php**
 ```php
 <?php
-	//引入公众号服务类
-	include("Muxin/weixin/pay/wx_qyfk.class.php");
 
+	//引用自动加载
+	include("./Muxin/auto.php");
 
 	//创建参数
 	$wx_config=array(
@@ -189,7 +208,7 @@
 	);
 	
 	//实例化企业付款类
-	$wx_dk=new wx_qyfk(
+	$wx_dk=new \Muxin\weixin\pay\wx_qyfk(
 		$wx_config['appid'],
 		$wx_config['partnerid'],
 		$wx_config['partnerkey'],
@@ -238,13 +257,14 @@
 
 ### ThinkPHP 使用方法
 
-将 Muxin 文件夹复制到 ThinkPHP/Lirary 目录
+ThinkPHP 3.x 将 Muxin 文件夹复制到 ThinkPHP/Lirary 目录下
+
+ThinkPHP 5.x 将 Muxin 文件夹复制到 项目目录的 extend 目录下
 
 ```php
 <?php
-	//导入类
-	import("Muxin.weixin.pay.wx_qyfk");
-	
+
+
 	//创建参数
 	$wx_config=array(
 		'appid'=>'wx91667d0976219999',	//微信公众号appid
@@ -258,7 +278,7 @@
 	
 
 	//实例化企业付款类
-	$wx_dk=new \wx_qyfk(
+	$wx_dk=new \Muxin\weixin\pay\wx_qyfk(
 		$wx_config['appid'],
 		$wx_config['partnerid'],
 		$wx_config['partnerkey'],
