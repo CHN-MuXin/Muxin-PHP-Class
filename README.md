@@ -33,17 +33,17 @@
 
 ├─ 项目目录
 
-│ ├─index.php
+│ ├─ index.php
 
-│ ├─Muxin
+│ ├─ Muxin
 
-│ │ ├─weixin
+│ │ ├─ weixin
 
-│ │ │ ├─mp
+│ │ │ ├─ mp
 
-│ │ │ │ ├─server
+│ │ │ │ ├─ server
 
-│ │ │ │ │ ├─wx_mp_server.class.php
+│ │ │ │ │ ├─ wx_mp_server.class.php
 
 ```
 
@@ -147,6 +147,136 @@
 
 ***
 
+<h3 id="wx_pay"></h3>
+<h3 id="wx_pay_qyfk">- 微信企业付款类</h3>
+
+
+**目录结构**
+
+```txt
+
+├─ 项目目录
+
+│ ├─ index.php
+
+│ ├─ Muxin
+
+│ │ ├─ weixin
+
+│ │ │ ├─ pay
+
+│ │ │ │ ├─ wx_qyfk.class.php
+
+
+```
+
+**index.php**
+```php
+<?php
+	//引入公众号服务类
+	include("Muxin/weixin/pay/wx_qyfk.class.php");
+
+
+	//创建参数
+	$wx_config=array(
+		'appid'=>'wx91667d0976219999',	//微信公众号appid
+		'partnerid'=>'1377329999',		//微信支付商户号
+		'partnerkey'=>'key',			//微信支付api安全密钥
+		'cert'=>'my/apiclient_cert.pem',//微信支付证书
+		'key'=>'my/apiclient_key.pem',	//微信支付证书密钥
+		'url'=>'https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers',
+		'ip'=>'127.0.0.1',				//用户ip  (动态获取用户IP)
+	);
+	
+	//实例化企业付款类
+	$wx_dk=new wx_qyfk(
+		$wx_config['appid'],
+		$wx_config['partnerid'],
+		$wx_config['partnerkey'],
+		$wx_config['cert'],
+		$wx_config['key'],
+		$wx_config['url'],
+		$wx_config['ip']  
+	);
+
+
+	//初始化打款信息
+	$openid='用户的OPENID';
+	//付款金额(不小于1)
+	$money=1;
+	//订单号
+	$o_id='test'.time();
+	//付款详情
+	$info='付款说明';
+
+	//开始打款
+	$ret=$wx_dk->dakuan($openid,$money,$o_id,$info);
+	//打印结果
+	var_dump($ret);
+		
+	/*
+	//成功结果示例
+	Array
+	(
+		[RETURN_CODE] => SUCCESS
+		[RETURN_MSG] => 
+		[MCH_APPID] => wx91667d0976219999
+		[MCHID] => 1377329999
+		[DEVICE_INFO] => 
+		[NONCE_STR] => ffDx0ZeUOyb2oWhk26RHglxnfMgqi7tS
+		[RESULT_CODE] => SUCCESS
+		[PARTNER_TRADE_NO] => test1482901333
+		[PAYMENT_NO] => 1000018301201612285710545447
+		[PAYMENT_TIME] => 2016-12-28 13:02:16
+	)
+	*/
+	
+
+?>
+```
+
+
+### ThinkPHP 使用方法
+
+将 Muxin 文件夹复制到 ThinkPHP/Lirary 目录
+
+```php
+<?php
+	//导入类
+	import("Muxin.weixin.pay.wx_qyfk");
+	
+	//创建参数
+	$wx_config=array(
+		'appid'=>'wx91667d0976219999',	//微信公众号appid
+		'partnerid'=>'1377329999',		//微信支付商户号
+		'partnerkey'=>'key',			//微信支付api安全密钥
+		'cert'=>'my/apiclient_cert.pem',//微信支付证书
+		'key'=>'my/apiclient_key.pem',	//微信支付证书密钥
+		'url'=>'https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers',
+		'ip'=>get_client_ip(),			//用户ip
+	);
+	
+
+	//实例化企业付款类
+	$wx_dk=new \wx_qyfk(
+		$wx_config['appid'],
+		$wx_config['partnerid'],
+		$wx_config['partnerkey'],
+		$wx_config['cert'],
+		$wx_config['key'],
+		$wx_config['url'],
+		$wx_config['ip']  
+	);
+	
+	//后面的步骤参考上面
+
+?>
+```
+
+
+[返回目录](#menu)
+
+***
 
 
 
