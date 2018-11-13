@@ -25,6 +25,7 @@
 	* [支付宝回调类](#alipay_class)
 * [其它类](#other_class)
 	* [天气类](#other_weather_class)
+	* [邮件类 PHPMailer (第三方)](#other_PHPMailer_class)
 
 ***
 
@@ -338,6 +339,88 @@ ThinkPHP 可以直接使用自动加载机制实例化或者继承类。
 
 ?>
 
+```
+
+
+[返回目录](#menu)
+
+
+
+***
+
+
+<h3 id="other_PHPMailer_class">- PHPMailer 邮件类(第三方)</h3>
+
+
+```php
+
+<?php
+
+		//实例化邮件类
+		$mail = new \Muxin\PHPMailer\PHPMailer();
+		
+		//设置语言版本 第一个参数语言名称 第二个参数语言包路径 默认使用类目录下的
+		$mail->SetLanguage('zh_cn');
+
+		// 设置邮件程序使用 SMTP
+		$mail->IsSMTP();    
+		
+		//指定主服务器和备用服务器
+		$mail->Host = "smtp.xxxx.com;smtp1.xxxx.com";
+		
+		//打开SMTP身份验证
+		$mail->SMTPAuth = true;
+		
+		// SMTP 用户名
+		$mail->Username = "youName";
+		
+		// SMTP 密码
+		$mail->Password = "youPassWord";
+
+		// 发信人邮箱
+		$mail->From = "name@xxxx.com";
+		
+		// 来自  比如该邮件来自 XX 客户端 XX 网站
+		$mail->FromName = "邮件来自";
+		
+		
+		// 添加收件人地址 带收件人名称
+		$mail->AddAddress("test@xx.com", "收件人称呼");
+		
+		// 添加收件人地址 名称是可选的
+		//$mail->AddAddress("ellen@example.com");                  
+		
+		// 添加回复邮件地址 跟回复邮件名称  收件人点击回复时回复这个邮件 不添加为发件邮箱
+		$mail->AddReplyTo("rep@xxxx.com", "回复此邮件");
+
+		// 将自动换行设置为50个字符
+		$mail->WordWrap = 50;                                 
+		
+		// 添加附件
+		//$mail->AddAttachment("/var/tmp/file.tar.gz");         
+		
+		// 附件可以指定名称
+		//$mail->AddAttachment("/tmp/image.jpg", "new.jpg");    
+		
+		// 将电子邮件格式设置为HTML
+		$mail->IsHTML(true);                                  
+
+		$mail->Subject = "邮件主题";
+		
+		$mail->Body    = "这是邮件正文 <b>以粗体显示!</b>";
+		
+		//$mail->AltBody = "这是非 HTML 格式的纯文本正文。";
+		
+
+		if(!$mail->Send()){
+		   echo "邮件无法发送. <p>";
+		   echo "邮件错误: " . $mail->ErrorInfo;
+		   exit;
+		}else{
+			echo "信息已发送";
+		}
+	
+?>
 ```
 
 
