@@ -9,8 +9,11 @@
 
 ***
 
+
 <h2 id="menu">项目目录</h2>
 
+
+* [目录结构](#Dir_description)
 * [微信类](#wx_class)
 	* [微信公众号类](#wx_mp)
 		* [微信公众号后台服务器类](#wx_mp_server)
@@ -24,11 +27,12 @@
 
 ***
 
-<h3 id="wx_class"></h3>
-<h3 id="wx_mp"></h3>
-<h3 id="wx_mp_server">- 微信公众号后台服务器</h3>
 
-**目录结构**
+<h3 id="Dir_description">- 目录结构</h3>
+
+
+##### 普通项目
+
 
 ```txt
 
@@ -40,16 +44,17 @@
 
 │ │ ├─ auto.php
 
-│ │ ├─ weixin
+│ │ ├─ ... 其它文件或目录
 
-│ │ │ ├─ mp
-
-│ │ │ │ ├─ server
-
-│ │ │ │ │ ├─ wx_mp_server.class.php
 
 ```
 
+
+普通项目要在 index.php 文件或者其它项目文件引入 auto.php 以实现自动加载。
+
+
+
+例：
 **index.php**
 ```php
 <?php
@@ -57,6 +62,71 @@
 
 	//引用自动加载
 	include("./Muxin/auto.php");
+	
+	...
+	...
+?>
+```
+
+
+ThinkPHP 可以直接使用自动加载机制实例化或者继承类。
+
+
+##### ThinkPHP 3.x 项目
+
+
+
+```txt
+
+├─ 项目目录
+
+│ ├─ index.php
+
+│ ├─ ThinkPHP
+
+│ │ ├─ Library
+
+│ │ │ ├─ Muxin
+
+│ │ │ │ ├─ ... 其它文件或目录
+
+
+```
+
+
+##### ThinkPHP 5.x 项目
+
+
+
+```txt
+
+├─ 项目目录
+
+│ ├─ index.php
+
+│ ├─ ThinkPHP
+
+│ ├─ extend
+
+│ │ ├─ Muxin
+
+│ │ │ ├─ ... 其它文件或目录
+
+
+```
+
+
+***
+
+
+<h3 id="wx_class"></h3>
+<h3 id="wx_mp"></h3>
+<h3 id="wx_mp_server">- 微信公众号后台服务器</h3>
+
+
+**index.php**
+```php
+<?php
 
 	//继承公众号类实现自己的功能
 	class test extends \Muxin\weixin\mp\server\wx_mp_server{
@@ -126,75 +196,57 @@
 	$t = new test($config['APPID'],$config['TOKEN'],$config['encodingAesKey'],1);		
 
 ?>
-```
 
-
-### ThinkPHP 使用方法
-
-ThinkPHP 3.x 将 Muxin 文件夹复制到 ThinkPHP/Lirary 目录下
-
-ThinkPHP 5.x 将 Muxin 文件夹复制到 项目目录的 extend 目录下
-
-
-```php
-<?php
-
-	//继承 wx_mp_server 类
-	class test extends \Muxin\weixin\mp\server\wx_mp_server{
-		/*
-			您的业务代码
-		*/
-	}
-?>
 ```
 
 
 [返回目录](#menu)
 
+
 ***
+
 
 <h3 id="wx_mp_mbxx">- 微信公众号模板消息类</h3>
 
 
+**index.php**
+```php
+<?php
+
+	//创建公众号参数
+	$arr=array(
+	
+	);
+	
+	//实例化模板信息类
+	$test=new \Muxin\weixin\mp\wx_mbxx($arr);
+
+	//初始化模板信息格式
+	$msg=array(
+	
+	);
+
+	//发送信息
+	$ret=$wx_dk->test($msg);
+	
+?>
+
+```
 
 
 [返回目录](#menu)
 
-***
 
+***
 
 
 <h3 id="wx_pay"></h3>
 <h3 id="wx_pay_qyfk">- 微信企业付款类</h3>
 
 
-**目录结构**
-
-```txt
-
-├─ 项目目录
-
-│ ├─ index.php
-
-│ ├─ Muxin
-
-│ │ ├─ auto.php
-
-│ │ ├─ weixin
-
-│ │ │ ├─ pay
-
-│ │ │ │ ├─ wx_qyfk.class.php
-
-
-```
-
 **index.php**
 ```php
 <?php
-
-	//引用自动加载
-	include("./Muxin/auto.php");
 
 	//创建参数
 	$wx_config=array(
@@ -249,54 +301,15 @@ ThinkPHP 5.x 将 Muxin 文件夹复制到 项目目录的 extend 目录下
 		[PAYMENT_TIME] => 2016-12-28 13:02:16
 	)
 	*/
-	
 
 ?>
-```
 
-
-### ThinkPHP 使用方法
-
-ThinkPHP 3.x 将 Muxin 文件夹复制到 ThinkPHP/Lirary 目录下
-
-ThinkPHP 5.x 将 Muxin 文件夹复制到 项目目录的 extend 目录下
-
-```php
-<?php
-
-
-	//创建参数
-	$wx_config=array(
-		'appid'=>'wx91667d0976219999',	//微信公众号appid
-		'partnerid'=>'1377329999',		//微信支付商户号
-		'partnerkey'=>'key',			//微信支付api安全密钥
-		'cert'=>'my/apiclient_cert.pem',//微信支付证书
-		'key'=>'my/apiclient_key.pem',	//微信支付证书密钥
-		'url'=>'https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers',
-		'ip'=>get_client_ip(),			//用户ip
-	);
-	
-
-	//实例化企业付款类
-	$wx_dk=new \Muxin\weixin\pay\wx_qyfk(
-		$wx_config['appid'],
-		$wx_config['partnerid'],
-		$wx_config['partnerkey'],
-		$wx_config['cert'],
-		$wx_config['key'],
-		$wx_config['url'],
-		$wx_config['ip']  
-	);
-	
-	//后面的步骤参考上面
-
-?>
 ```
 
 
 [返回目录](#menu)
 
-***
 
+***
 
 
