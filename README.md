@@ -23,7 +23,8 @@
 		* [企业付款类](#wx_pay_qyfk)
 * [支付宝类](#alipay_class)
 	* [支付宝回调类](#alipay_class)
-
+* [其它类](#other_class)
+	* [天气类](#other_weather_class)
 
 ***
 
@@ -312,4 +313,36 @@ ThinkPHP 可以直接使用自动加载机制实例化或者继承类。
 
 ***
 
+
+<h3 id="other_class"></h3>
+<h3 id="other_weather_class">- 天气查询类</h3>
+
+
+**index.php**
+```php
+<?php
+	
+	//实例化天气类
+	$test = new \Muxin\weather\weather();
+	//设置要查询的城市或者包含城市名的字符串
+	$test->setCity("我要查北京市的天气");
+	//获取 json格式的天气
+	var_dump($test->getJson());
+	
+	//获取 已格式化当天天气
+	var_dump($test->get_weather());
+	//获取 已格式化一周天气
+	var_dump($test->get_7days_weather());	
+
+	//get_weather 和 get_7days_weather 方法可以带一个参数，参数和setCity 相同
+
+?>
+
+```
+
+
+[返回目录](#menu)
+
+
+***
 
