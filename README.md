@@ -25,7 +25,8 @@
 	* [支付宝回调类](#alipay_class)
 * [其它类](#other_class)
 	* [天气类](#other_weather_class)
-	* [邮件类 PHPMailer (第三方)](#other_PHPMailer_class)
+	* [邮件类 PHPMailer （第三方）](#other_PHPMailer_class)
+
 
 ***
 
@@ -349,7 +350,8 @@ ThinkPHP 可以直接使用自动加载机制实例化或者继承类。
 ***
 
 
-<h3 id="other_PHPMailer_class">- PHPMailer 邮件类(第三方)</h3>
+<h3 id="other_PHPMailer_class">- PHPMailer 邮件类（第三方）</h3>
+
 
 [PHPMailer 原项目 GitHub 地址](https://github.com/PHPMailer/PHPMailer)
 
@@ -431,4 +433,5 @@ ThinkPHP 可以直接使用自动加载机制实例化或者继承类。
 
 
 ***
+
 
