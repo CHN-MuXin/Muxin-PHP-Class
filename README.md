@@ -351,6 +351,9 @@ ThinkPHP 可以直接使用自动加载机制实例化或者继承类。
 
 <h3 id="other_PHPMailer_class">- PHPMailer 邮件类(第三方)</h3>
 
+[PHPMailer 原项目 GitHub 地址](https://github.com/PHPMailer/PHPMailer)
+
+
 
 ```php
 
