@@ -26,6 +26,7 @@
 * [其它类](#other_class)
 	* [天气类](#other_weather_class)
 	* [邮件类 PHPMailer （第三方）](#other_PHPMailer_class)
+	* [二维码生成 phpQRcode （第三方）](#other_phpQRcode_class)
 
 
 ***
@@ -434,4 +435,136 @@ ThinkPHP 可以直接使用自动加载机制实例化或者继承类。
 
 ***
 
+
+
+<h3 id="other_phpQRcode_class">- 二维码生成 phpQRcode（第三方）</h3>
+
+
+[phpQRcode 原项目 GitHub 地址](https://github.com/t0k4rt/phpqrcode)
+
+
+
+```php
+
+<?php
+
+	// 直接输出二维码
+	Muxin\Qrcode\Qrcode::png('二维码值');
+
+	// 保存二维码文件然后通过 HTML 输出
+	Muxin\Qrcode\Qrcode::png('二维码值','二维码路径.png');
+	echo '<img src="二维码路径.png" />'; 
+
+	// 使用 Svg 输出二维码
+	$svgCode = \Muxin\Qrcode\QRcode::svg('二维码值'); 
+	echo $svgCode;
+
+	// 使用 SVG 配置输出
+
+	// Configuring SVG 
+	$dataText   = 'PHP QR Code :)'; 
+	$svgTagId   = 'id-of-svg'; 
+	$saveToFile = false; 
+	$imageWidth = 250; // px 
+	// SVG file format support 
+	$svgCode = QRcode::svg($dataText, $svgTagId, $saveToFile, QR_ECLEVEL_L, $imageWidth);
+	
+	
+	
+	/*    **** 常用格式
+		//电话
+		tel:(86)18988888888
+		
+		//短信
+		sms:(86)18988888888
+		
+		//电子邮件
+		mailto:email@email.com
+		
+		//电子邮件带内容
+		$email = 'john.doe@example.com'; 
+		$subject = 'question'; 
+		$body = 'please write your question here'; 
+		$codeContents = 'mailto:'.$email.'?subject='.urlencode($subject).'&body='.urlencode($body); 
+		
+		//Skeype 通话
+		$skypeUserName = 'echo123'; 
+		// we building raw data 
+		$codeContents = 'skype:'.urlencode($skypeUserName).'?call'; 
+     
+		//名片 添加手机通讯录
+	    // here our data 
+		$name = 'John Doe'; 
+		$phone = '(049)012-345-678'; 
+		 
+		// we building raw data 
+		$codeContents  = 'BEGIN:VCARD'."\n"; 
+		$codeContents .= 'FN:'.$name."\n"; 
+		$codeContents .= 'TEL;WORK;VOICE:'.$phone."\n"; 
+		$codeContents .= 'END:VCARD'; 	
+		
+		//名片 详细 添加手机通讯录
+		// here our data 
+		$name         = 'John Doe'; 
+		$sortName     = 'Doe;John'; 
+		$phone        = '(049)012-345-678'; 
+		$phonePrivate = '(049)012-345-987'; 
+		$phoneCell    = '(049)888-123-123'; 
+		$orgName      = 'My Company Inc.'; 
+		$email        = 'john.doe@example.com'; 
+		// if not used - leave blank! 
+		$addressLabel     = 'Our Office'; 
+		$addressPobox     = ''; 
+		$addressExt       = 'Suite 123'; 
+		$addressStreet    = '7th Avenue'; 
+		$addressTown      = 'New York'; 
+		$addressRegion    = 'NY'; 
+		$addressPostCode  = '91921-1234'; 
+		$addressCountry   = 'USA'; 
+		// we building raw data 
+		$codeContents  = 'BEGIN:VCARD'."\n"; 
+		$codeContents .= 'VERSION:2.1'."\n"; 
+		$codeContents .= 'N:'.$sortName."\n"; 
+		$codeContents .= 'FN:'.$name."\n"; 
+		$codeContents .= 'ORG:'.$orgName."\n"; 
+		$codeContents .= 'TEL;WORK;VOICE:'.$phone."\n"; 
+		$codeContents .= 'TEL;HOME;VOICE:'.$phonePrivate."\n"; 
+		$codeContents .= 'TEL;TYPE=cell:'.$phoneCell."\n"; 
+		$codeContents .= 'ADR;TYPE=work;'. 
+			'LABEL="'.$addressLabel.'":' 
+			.$addressPobox.';' 
+			.$addressExt.';' 
+			.$addressStreet.';' 
+			.$addressTown.';' 
+			.$addressPostCode.';' 
+			.$addressCountry 
+		."\n"; 
+		$codeContents .= 'EMAIL:'.$email."\n"; 
+		$codeContents .= 'END:VCARD'; 		
+		
+		
+		
+		//名片 照片 添加手机通讯录
+		// here our data 
+		$name = 'John Doe'; 
+		$phone = '(049)012-345-678'; 
+		// WARNING! here jpeg file is only 40x40, grayscale, 50% quality! 
+		// with bigger images it will simply be TOO MUCH DATA for QR Code to handle! 
+		$avatarJpegFileName = 'avatar.jpg'; 
+		// we building raw data 
+		$codeContents  = 'BEGIN:VCARD'."\n"; 
+		$codeContents .= 'FN:'.$name."\n"; 
+		$codeContents .= 'TEL;WORK;VOICE:'.$phone."\n"; 
+		$codeContents .= 'PHOTO;JPEG;ENCODING=BASE64:'.base64_encode(file_get_contents($avatarJpegFileName))."\n"; 
+		$codeContents .= 'END:VCARD'; 		
+		
+	*/
+?>
+```
+
+
+[返回目录](#menu)
+
+
+***
 
