@@ -73,7 +73,7 @@ class wx_mp_server{
 		$msg_sign=$_GET['msg_signature'];
 		$timeStamp=$_GET['timestamp'];
 		$nonce=$_GET['nonce'];
-		$format = "<xml><ToUserName><![CDATA[toUser]]></ToUserName><Encrypt><![CDATA[%s]]></Encrypt></xml>";
+		$format = "<xml><ToUserName><![CDATA[%s]]></ToUserName><Encrypt><![CDATA[%s]]></Encrypt></xml>";
 		$from_xml = sprintf($format, $encrypt);
 		// 第三方收到公众号平台发送的消息
 		$msg = '';
@@ -372,12 +372,12 @@ class wx_mp_server{
 
 	public function ret_image($用户,$开发者,$图片ID){
 		$图片消息模板 = "<xml>
-		<ToUserName><![CDATA[toUser]]></ToUserName>
-		<FromUserName><![CDATA[fromUser]]></FromUserName>
-		<CreateTime>12345678</CreateTime>
-		<MsgType><![CDATA[image]]></MsgType>
+		<ToUserName><![CDATA[%s]]></ToUserName>
+		<FromUserName><![CDATA[%s]]></FromUserName>
+		<CreateTime>%s</CreateTime>
+		<MsgType><![CDATA[%s]]></MsgType>
 		<Image>
-		<MediaId><![CDATA[media_id]]></MediaId>
+		<MediaId><![CDATA[%s]]></MediaId>
 		</Image>
 		</xml>";
 		$时间 = time();
@@ -389,12 +389,12 @@ class wx_mp_server{
 
 	public function ret_voice($用户,$开发者,$语音ID){
 		$语音消息模板 = "<xml>
-		<ToUserName><![CDATA[toUser]]></ToUserName>
-		<FromUserName><![CDATA[fromUser]]></FromUserName>
-		<CreateTime>12345678</CreateTime>
-		<MsgType><![CDATA[voice]]></MsgType>
+		<ToUserName><![CDATA[%s]]></ToUserName>
+		<FromUserName><![CDATA[%s]]></FromUserName>
+		<CreateTime>%s</CreateTime>
+		<MsgType><![CDATA[%s]]></MsgType>
 		<Voice>
-		<MediaId><![CDATA[media_id]]></MediaId>
+		<MediaId><![CDATA[%s]]></MediaId>
 		</Voice>
 		</xml>";
 
@@ -406,14 +406,14 @@ class wx_mp_server{
 
 	public function ret_voide($用户,$开发者,$视频ID,$标题,$描述){
 		$视频消息模板 = "<xml>
-		<ToUserName><![CDATA[toUser]]></ToUserName>
-		<FromUserName><![CDATA[fromUser]]></FromUserName>
-		<CreateTime>12345678</CreateTime>
-		<MsgType><![CDATA[video]]></MsgType>
+		<ToUserName><![CDATA[%s]]></ToUserName>
+		<FromUserName><![CDATA[%s]]></FromUserName>
+		<CreateTime>%s</CreateTime>
+		<MsgType><![CDATA[%s]]></MsgType>
 		<Video>
-		<MediaId><![CDATA[media_id]]></MediaId>
-		<Title><![CDATA[title]]></Title>
-		<Description><![CDATA[description]]></Description>
+		<MediaId><![CDATA[%s]]></MediaId>
+		<Title><![CDATA[%s]]></Title>
+		<Description><![CDATA[%s]]></Description>
 		</Video> 
 		</xml>";
 
@@ -425,16 +425,16 @@ class wx_mp_server{
 
 	public function ret_music($用户,$开发者,$标题,$描述,$连接,$高品质,$缩略图ID){
 		$音乐消息模板 = "<xml>
-		<ToUserName><![CDATA[toUser]]></ToUserName>
-		<FromUserName><![CDATA[fromUser]]></FromUserName>
-		<CreateTime>12345678</CreateTime>
-		<MsgType><![CDATA[music]]></MsgType>
+		<ToUserName><![CDATA[%s]]></ToUserName>
+		<FromUserName><![CDATA[%s]]></FromUserName>
+		<CreateTime>%s</CreateTime>
+		<MsgType><![CDATA[%s]]></MsgType>
 		<Music>
-		<Title><![CDATA[TITLE]]></Title>
-		<Description><![CDATA[DESCRIPTION]]></Description>
-		<MusicUrl><![CDATA[MUSIC_Url]]></MusicUrl>
-		<HQMusicUrl><![CDATA[HQ_MUSIC_Url]]></HQMusicUrl>
-		<ThumbMediaId><![CDATA[media_id]]></ThumbMediaId>
+		<Title><![CDATA[%s]]></Title>
+		<Description><![CDATA[%s]]></Description>
+		<MusicUrl><![CDATA[%s]]></MusicUrl>
+		<HQMusicUrl><![CDATA[%s]]></HQMusicUrl>
+		<ThumbMediaId><![CDATA[%s]]></ThumbMediaId>
 		</Music>
 		</xml>";
 
@@ -446,23 +446,23 @@ class wx_mp_server{
 
 	public function ret_news($用户,$开发者,$个数,$信息,$标题,$描述,$图片连接,$跳转){
 		$图文消息模板 = "<xml>
-		<ToUserName><![CDATA[toUser]]></ToUserName>
-		<FromUserName><![CDATA[fromUser]]></FromUserName>
-		<CreateTime>12345678</CreateTime>
-		<MsgType><![CDATA[news]]></MsgType>
+		<ToUserName><![CDATA[%s]]></ToUserName>
+		<FromUserName><![CDATA[%s]]></FromUserName>
+		<CreateTime>%s</CreateTime>
+		<MsgType><![CDATA[%s]]></MsgType>
 		<ArticleCount>2</ArticleCount>
 		<Articles>
 		<item>
-		<Title><![CDATA[title1]]></Title> 
-		<Description><![CDATA[description1]]></Description>
-		<PicUrl><![CDATA[picurl]]></PicUrl>
-		<Url><![CDATA[url]]></Url>
+		<Title><![CDATA[%s]]></Title> 
+		<Description><![CDATA[%s]]></Description>
+		<PicUrl><![CDATA[%s]]></PicUrl>
+		<Url><![CDATA[%s]]></Url>
 		</item>
 		<item>
-		<Title><![CDATA[title]]></Title>
-		<Description><![CDATA[description]]></Description>
-		<PicUrl><![CDATA[picurl]]></PicUrl>
-		<Url><![CDATA[url]]></Url>
+		<Title><![CDATA[%s]]></Title>
+		<Description><![CDATA[%s]]></Description>
+		<PicUrl><![CDATA[%s]]></PicUrl>
+		<Url><![CDATA[%s]]></Url>
 		</item>
 		</Articles>
 		</xml>";
